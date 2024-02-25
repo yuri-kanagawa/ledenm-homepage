@@ -13,8 +13,8 @@ export const AppList = () => {
 
   const columnSpacing = useMemo(() => {
     if (isDesktopSize || isLaptopSize) return 5
-    else if (isTabletSize) return 3
-    else return 1
+    if (isTabletSize) return 3
+    return 1
   }, [isDesktopSize, isLaptopSize, isTabletSize])
   return (
     <Box
