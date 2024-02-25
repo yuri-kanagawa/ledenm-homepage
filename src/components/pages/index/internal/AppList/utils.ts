@@ -1,11 +1,6 @@
-import { App } from 'src/locales/common'
 import { LocalType } from 'src/hooks/useLocal'
-type AppType = {
-  name: string
-  explain: string
+import { AppType } from 'src/locales/app'
+
+export const getAppList = (t: LocalType['t']): AppType[] => {
+  return Object.entries(t.apps).map(([key, value]) => value)
 }
-export const getAppList = (t: LocalType['t']): AppType[] => [
-  { name: App.cCoin, explain: t.cCoinExplain },
-  { name: App.cDice, explain: t.cDiceExplain },
-  { name: App.cRoulette, explain: t.cRouletteExplain }
-]

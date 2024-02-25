@@ -1,8 +1,7 @@
+import {ja_app} from './app'
 export const ja = {
   app: 'アプリ',
   contact: '連絡',
   language: '言語',
-  cCoinExplain: 'C-Dice はいかさまサイコロです',
-  cDiceExplain: 'C-Dice はいかさまサイコロです',
-  cRouletteExplain: 'C-Dice はいかさまサイコロです'
+  apps: ja_app
 } as const
