@@ -8,7 +8,7 @@ import { useMediaQuerySize } from 'src/hooks/useMediaQuerySize'
 import { scrollHome } from 'src/constants/scroll'
 
 export const AppList = () => {
-  const { lang, t } = useLocale()
+  const { t } = useLocale()
   const { isDesktopSize, isLaptopSize, isTabletSize } = useMediaQuerySize()
 
   const columnSpacing = useMemo(() => {
