@@ -9,7 +9,6 @@ import { useLocale } from 'src/hooks/useLocal'
 
 import IconButton from '@mui/material/IconButton'
 import {
-  BiliBiliIconSize,
   DefaultIconSize,
   createIconSizeCalculator,
   IconSizeMediaType,

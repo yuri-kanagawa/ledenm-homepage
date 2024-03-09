@@ -5,20 +5,20 @@ export type AppType= {
   name: string;
   explain: string;
 }
-type EnAppType = {[key: string]: AppType }
-export const en_app: EnAppType = {
+type AppsType = {[key: string]: AppType }
+export const apps: AppsType = {
   cCoin: {
     name: App.cCoin,
-    explain: ''
+    explain: 'C-Coin is Cheat Coin'
   },
   cDice: {
     name: App.cDice,
-    explain: ''
+    explain: 'C-Dice is Cheat Dice'
   },
   cRoulette: {
     name: App.cRoulette,
-    explain: ''
+    explain: 'C-Roulette is Cheat Roulette'
   }
 };
 
-export type AppsType = ExactType<EnAppType,typeof en_app>
+export type AppsValueType = ExactType<AppsType,typeof apps>

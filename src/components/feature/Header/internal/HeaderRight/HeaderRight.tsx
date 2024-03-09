@@ -12,7 +12,6 @@ export const HeaderRight: React.FC<Props> = ({ isBackgroundBlack }) => {
   const { t } = useLocale()
   return (
     <>
-
       <Typography sx={{ ...getTextStyle(isBackgroundBlack), mr: 2 }}>
         <Scroll to={scrollHome.app} smooth={true} text={t.app} />
       </Typography>
@@ -23,3 +22,4 @@ export const HeaderRight: React.FC<Props> = ({ isBackgroundBlack }) => {
     </>
   )
 }
+
