@@ -11,17 +11,17 @@ import { scrollYState } from 'src/stores/scrollY/scrollYContext'
 function IndexPage() {
   const setScrollY = useSetRecoilState(scrollYState)
 
-  const handleScroll = () => {
-    const newY = window.scrollY
-    setScrollY(newY)
-  }
 
   useEffect(() => {
+    const handleScroll = () => {
+      const newY = window.scrollY
+      setScrollY(newY)
+    }
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [handleScroll])
+  }, [setScrollY])
   return (
     <>
       <Header />
@@ -32,4 +32,5 @@ function IndexPage() {
     </>
   )
 }
+
 export default IndexPage

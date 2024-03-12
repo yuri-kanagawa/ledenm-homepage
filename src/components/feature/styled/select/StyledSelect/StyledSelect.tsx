@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Select, SelectProps } from '@mui/material'
 import { theme } from 'src/stores/thema/thema'
+
 type Props = SelectProps & {
   isBackgroundBlack: boolean
 }

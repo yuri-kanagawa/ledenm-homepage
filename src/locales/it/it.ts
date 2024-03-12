@@ -1,8 +1,6 @@
-import { generate_apps } from '../utils'
-import {apps} from './app'
-export const it = {
-  app: 'app',
-  contact: 'contatto',
-  language: 'lingua',
-  ...generate_apps(apps)
-} as const
+import { generate_local } from 'src/utils/locales'
+import { words } from './words'
+import { apps } from './app'
+import { sns } from './sns'
+
+export const it = generate_local(words, apps, sns)

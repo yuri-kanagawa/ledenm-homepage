@@ -1,11 +1,14 @@
-import { getIsEnglish, getIsExistLanguage } from "src/utils/local"
+import { getIsEnglish, getIsExistLanguage } from 'src/utils/locales/'
 import { redirect } from 'next/navigation'
+
 export default function Layout({
                                  children,
                                  params
                                }: {
   children: React.ReactNode
-  params: { locale: string }
+  params: {
+    locale: string
+  }
 }) {
   const locale = params.locale
 

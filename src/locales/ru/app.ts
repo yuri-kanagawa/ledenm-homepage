@@ -1,16 +1,22 @@
-import {AppsType} from '../en'
-import {App} from '../common'
-export const apps: AppsType = {
+import { AppsValueType } from '../en'
+import { App } from 'src/constants/app'
+
+const get_url = (url: string): string => `${url}/ru`
+
+export const apps: AppsValueType = {
   cCoin: {
-    name: App.cCoin,
-    explain: 'C-Coin — это чит-монета'
+    name: App.cCoin.name,
+    explain: 'C-Coin — это чит-монета',
+    url: get_url(App.cCoin.url)
   },
   cDice: {
-    name: App.cDice,
-    explain: 'C-Dice — это чит-кости'
+    name: App.cDice.name,
+    explain: 'C-Dice — это чит-кости',
+    url: get_url(App.cDice.url)
   },
   cRoulette: {
-    name: App.cRoulette,
-    explain: 'C-Roulette — это чит-рулетка'
+    name: App.cRoulette.name,
+    explain: 'C-Roulette — это чит-рулетка',
+    url: get_url(App.cRoulette.url)
   }
 }

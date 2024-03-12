@@ -33,7 +33,7 @@ export const AppList = () => {
           columnSpacing={columnSpacing}
         >
           {getAppList(t).map((e, index) => (
-            <AppCard key={index} productName={e.name} explain={e.explain} />
+            <AppCard key={index} appName={e.name} explain={e.explain} />
           ))}
         </Grid>
       </Stack>

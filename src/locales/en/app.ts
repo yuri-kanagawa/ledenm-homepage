@@ -1,24 +1,30 @@
-import { ExactType } from 'src/types';
-import {App} from '../common'
+import { ExactType } from 'src/types'
+import { App } from 'src/constants/app'
 
-export type AppType= {
-  name: string;
-  explain: string;
+export type AppType = {
+  name: string
+  explain: string
+  url: string
 }
-type AppsType = {[key: string]: AppType }
+type AppsType = {
+  [key: string]: AppType
+}
 export const apps: AppsType = {
   cCoin: {
-    name: App.cCoin,
-    explain: 'C-Coin is Cheat Coin'
+    name: App.cCoin.name,
+    explain: 'C-Coin is Cheat Coin',
+    url: App.cCoin.url
   },
   cDice: {
-    name: App.cDice,
-    explain: 'C-Dice is Cheat Dice'
+    name: App.cDice.name,
+    explain: 'C-Dice is Cheat Dice',
+    url: App.cDice.url
   },
   cRoulette: {
-    name: App.cRoulette,
-    explain: 'C-Roulette is Cheat Roulette'
+    name: App.cRoulette.name,
+    explain: 'C-Roulette is Cheat Roulette',
+    url: App.cRoulette.url
   }
-};
+}
 
-export type AppsValueType = ExactType<AppsType,typeof apps>
+export type AppsValueType = ExactType<AppsType, typeof apps>

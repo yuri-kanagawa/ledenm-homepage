@@ -1,11 +1,6 @@
-import { generate_apps, AppsType } from '../utils'
-import {apps} from './app'
-import { text, TextType } from './text'
+import { generate_local, LocalConstType } from 'src/utils/locales'
+import { apps } from './app'
+import { words } from 'src/locales/en/words'
+import { sns } from './sns'
 
-export type LocalConstType = TextType & AppsType
-export const en: LocalConstType = {
-  app: 'APP',
-  contact: 'CONTACT',
-  language: 'Language',
-  ...generate_apps(apps)
-} as const
+export const en: LocalConstType = generate_local(words, apps, sns)

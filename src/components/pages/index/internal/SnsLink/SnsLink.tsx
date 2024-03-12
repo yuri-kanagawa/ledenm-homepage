@@ -1,27 +1,23 @@
 import { Box, Grid, Typography } from '@mui/material'
-import {
-  AiFillYoutube,
-  AiOutlineInstagram,
-  AiOutlineTwitter
-} from 'react-icons/ai'
+import { AiFillYoutube, AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai'
 import { BsTiktok } from 'react-icons/bs'
 import { useLocale } from 'src/hooks/useLocal'
 
 import IconButton from '@mui/material/IconButton'
 import {
-  DefaultIconSize,
-  createIconSizeCalculator,
-  IconSizeMediaType,
-  TikTokIconSize,
   ColumnSpacingMediaType,
-  getColumnSpacing
+  createIconSizeCalculator,
+  DefaultIconSize,
+  getColumnSpacing,
+  IconSizeMediaType,
+  TikTokIconSize
 } from 'src/components/pages/index/internal/SnsLink/utils'
 import { useMediaQuerySize } from 'src/hooks/useMediaQuerySize'
 import { IconButtonWhiteStyle } from 'src/style/iconStyle'
 import { scrollHome } from 'src/constants/scroll'
 
 export const SnsLink = () => {
-  const { t, lang } = useLocale()
+  const { t } = useLocale()
   const { isTabletSize, isMobileSize, isLaptopSize, isOverTabletSize } =
     useMediaQuerySize()
 
@@ -40,6 +36,15 @@ export const SnsLink = () => {
 
   const getIconSize = createIconSizeCalculator(iconSizeMedia)
 
+  const openTab = (url: string) => window.open(url)
+
+  const onClickYouTube = () => openTab(t.sns.YouTube)
+  const onClickTwitter = () => openTab(t.sns.twitter)
+
+  const onClickInstagram = () => openTab(t.sns.instagram)
+
+  const ontClickTikToke = () => openTab(t.sns.TikTok)
+
   return (
     <Box id={scrollHome.contact} sx={{ background: 'black' }}>
       <Typography
@@ -53,22 +58,22 @@ export const SnsLink = () => {
         columnSpacing={columnSpacing}
       >
         <Grid item>
-          <IconButton sx={IconButtonWhiteStyle}>
+          <IconButton sx={IconButtonWhiteStyle} onClick={onClickTwitter}>
             <AiOutlineTwitter size={getIconSize(DefaultIconSize)} />
           </IconButton>
         </Grid>
         <Grid item>
-          <IconButton sx={IconButtonWhiteStyle}>
+          <IconButton sx={IconButtonWhiteStyle} onClick={onClickInstagram}>
             <AiOutlineInstagram size={getIconSize(DefaultIconSize)} />
           </IconButton>
         </Grid>
         <Grid item>
-          <IconButton sx={IconButtonWhiteStyle}>
+          <IconButton sx={IconButtonWhiteStyle} onClick={onClickYouTube}>
             <AiFillYoutube size={getIconSize(DefaultIconSize)} />
           </IconButton>
         </Grid>
         <Grid item>
-          <IconButton sx={IconButtonWhiteStyle}>
+          <IconButton sx={IconButtonWhiteStyle} onClick={ontClickTikToke}>
             <BsTiktok
               size={getIconSize(TikTokIconSize)}
               style={{ marginBottom: 10 }}
