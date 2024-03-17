@@ -1,1 +1,1 @@
-export * from './pt'
+export * from './ru'
