@@ -1,7 +1,14 @@
-import { getIsEnglish, getIsExistLanguage, getLocalFile } from 'src/utils/locales/'
+import { generateLocales, getIsEnglish, getIsExistLanguage, getLocalFile } from 'src/utils/locales/'
 import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
 
+type PramsType = {
+  locale: string
+}
+
+export async function generateStaticParams(): Promise<PramsType[]> {
+  return generateLocales()
+}
 
 type Props = {
   params: {

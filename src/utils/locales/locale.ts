@@ -6,3 +6,9 @@ export const getIsExistLanguage = (value: string): boolean => value in LANGUAGES
 
 export const LanguageList: LanguageType[] = convertObjectKeysToArray(LANGUAGES) as LanguageType[]
 export const getIsEnglish = (lang: string): boolean => lang === 'en'
+export const generateLocales = () => LanguageList.map((e) => {
+  return {
+    locale: e
+  }
+})
+
