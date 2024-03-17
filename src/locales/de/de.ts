@@ -1,7 +1,7 @@
-import { generate_local } from 'src/utils/locales'
+import { generateLocal } from 'src/utils/locales'
 import { apps } from './app'
 import { words } from 'src/locales/de/words'
 import { sns } from './sns'
+import { meta } from './meta'
 
-
-export const de = generate_local(words, apps, sns)
+export const de = generateLocal(words, apps, sns, meta)

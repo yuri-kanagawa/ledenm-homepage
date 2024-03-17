@@ -1,14 +1,9 @@
 import AppProvider from 'src/app/provider'
 import React from 'react'
 import { Metadata } from 'next'
+import { en } from 'src/locales/en'
 
-export const metadata: Metadata = {
-  title: 'LEDENM\'s HomePage',
-  description: 'LEDENM\'s HomePage\nWe introduce the application',
-  openGraph: {
-    title: 'LEDENM HOMEPAGE'
-  }
-}
+export const metadata: Metadata = en.meta
 
 export default function RootLayout({
                                      children
@@ -25,7 +20,6 @@ export default function RootLayout({
         margin: 0,
         padding: 0,
         background: 'black'
-        // backgroundColor: 'black'
       }}>
     <AppProvider>{children}</AppProvider>
     </body>

@@ -1,0 +1,1 @@
+export const LEDENM = 'LEDENM'

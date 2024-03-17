@@ -12,7 +12,7 @@ import { ru } from 'src/locales/ru/ru'
 import { zh } from 'src/locales/zh'
 import { LocalConstType } from 'src/utils/locales'
 
-export const get_local_file = (language: string): LocalConstType => {
+export const getLocalFile = (language: string): LocalConstType => {
   switch (language) {
     case 'ar':
       return ar
