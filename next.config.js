@@ -6,8 +6,6 @@ const withPWA = require('next-pwa')({
 
 module.exports = {
   output: 'export',
-  experimental: {
-    appDir: true
-  },
+  images: { unoptimized: true },
   reactStrictMode: true
 }

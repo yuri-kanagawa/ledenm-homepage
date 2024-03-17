@@ -5,13 +5,19 @@ import { AppList } from './internal/AppList'
 import { SnsLink } from './internal/SnsLink'
 import { Footer } from 'src/components/feature/Footer'
 import { useEffect } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { scrollYState } from 'src/stores/scrollY/scrollYContext'
+import { langState } from 'src/stores/lang/langContext'
+import { LanguageType } from 'src/constants/languages'
 
-function IndexPage() {
+type Props = {
+  locale?: string
+}
+
+function IndexPage(props: Props) {
+  const locale = props.locale
   const setScrollY = useSetRecoilState(scrollYState)
-
-
+  const [lang, setLang] = useRecoilState(langState)
   useEffect(() => {
     const handleScroll = () => {
       const newY = window.scrollY
@@ -22,6 +28,11 @@ function IndexPage() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [setScrollY])
+  useEffect(() => {
+    if (locale != undefined && locale != lang) {
+      setLang(locale as LanguageType)
+    }
+  }, [lang, locale, setLang])
   return (
     <>
       <Header />
