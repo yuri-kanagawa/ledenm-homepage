@@ -10,8 +10,7 @@ type Props = {
 }
 export const AppCard: React.FC<Props> = (props) => {
   const { appName, explain } = props
-
-  console.log(`/product/${appName}/portfolio.png`)
+  
   return (
     <Grid item xs={3}>
       <Card>
