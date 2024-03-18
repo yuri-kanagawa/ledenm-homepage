@@ -17,9 +17,10 @@ export default function RootLayout({
     </head>
     <body
       style={{
-        margin: 0,
-        padding: 0,
-        background: 'black'
+        background: 'black',
+        overflowX: 'hidden',
+        width: '100%',
+        height: '100%'
       }}>
     <AppProvider>{children}</AppProvider>
     </body>
