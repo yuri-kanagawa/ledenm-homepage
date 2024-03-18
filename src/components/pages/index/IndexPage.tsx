@@ -11,6 +11,7 @@ import { langState } from 'src/stores/lang/langContext'
 import { LanguageType } from 'src/constants/languages'
 import { Box } from '@mui/material'
 
+
 type Props = {
   locale?: string
 }
