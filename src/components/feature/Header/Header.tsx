@@ -40,6 +40,7 @@ export const Header: React.FC = () => {
                 : 'white',
           overflow: 'hidden'
         }}
+        position='sticky'
       >
         <Toolbar sx={{ my: 1 }}>
           <IconButton onClick={scrollToTop}>
