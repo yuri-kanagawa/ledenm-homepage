@@ -7,5 +7,10 @@ const withPWA = require('next-pwa')({
 module.exports = {
   output: 'export',
   images: { unoptimized: true },
-  reactStrictMode: true
+  experimental: {
+    runtime: 'experimental-edge',
+    appDir: true
+  },
+  reactStrictMode: true,
+  swcMinify: true
 }
