@@ -11,9 +11,9 @@ import { useWindowSize } from 'src/hooks/useWindowSize'
 import { getMovieHeight } from 'src/style/videoStyle'
 import { useMediaQuerySize } from 'src/hooks/useMediaQuerySize'
 import MenuIcon from '@mui/icons-material/Menu'
-import { TransitionGroup } from 'react-transition-group'
 
 import { HeaderRight } from 'src/components/feature/Header/internal/HeaderRight/HeaderRight'
+
 export const Header: React.FC = () => {
   const { t } = useLocale()
   const scrollY = useRecoilValue(scrollYState)
@@ -36,27 +36,28 @@ export const Header: React.FC = () => {
             isBackgroundBlack && isMobileWithOpenMenu
               ? 'black'
               : isBackgroundBlack
-              ? 'transparent'
-              : 'white'
+                ? 'transparent'
+                : 'white',
+          overflow: 'hidden'
         }}
       >
         <Toolbar sx={{ my: 1 }}>
           <IconButton onClick={scrollToTop}>
             <Image
-              src="icon/lily.svg"
+              src='icon/lily.svg'
               alt={'Home'}
-              width="60"
-              height="60"
+              width='60'
+              height='60'
               style={{ filter: isBackgroundBlack ? 'invert(100%)' : '' }}
             />
           </IconButton>
           <Box flexGrow={1} />
           {isMobileSize ? (
             <IconButton
-              size="large"
-              edge="start"
+              size='large'
+              edge='start'
               sx={{ color: isBackgroundBlack ? 'white' : 'black' }}
-              aria-label="menu"
+              aria-label='menu'
               onClick={onClickMenu}
             >
               <MenuIcon />

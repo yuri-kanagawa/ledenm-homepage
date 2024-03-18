@@ -9,7 +9,6 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 import { scrollYState } from 'src/stores/scrollY/scrollYContext'
 import { langState } from 'src/stores/lang/langContext'
 import { LanguageType } from 'src/constants/languages'
-import { Box } from '@mui/material'
 
 
 type Props = {
@@ -36,13 +35,13 @@ function IndexPage(props: Props) {
     }
   }, [lang, locale, setLang])
   return (
-    <Box>
+    <>
       <Header />
       <Hero />
       <AppList />
       <SnsLink />
       <Footer />
-    </Box>
+    </>
   )
 }
 
