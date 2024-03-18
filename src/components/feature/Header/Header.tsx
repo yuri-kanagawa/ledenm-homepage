@@ -38,7 +38,7 @@ export const Header: React.FC = () => {
               : isBackgroundBlack
                 ? 'transparent'
                 : 'white',
-          overflow: 'hidden'
+          width: '100vw'
         }}
         position='sticky'
       >
