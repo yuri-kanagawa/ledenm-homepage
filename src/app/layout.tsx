@@ -20,7 +20,9 @@ export default function RootLayout({
         background: 'black',
         overflowX: 'hidden',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        padding: 0,
+        margin: 0
       }}>
     <AppProvider>{children}</AppProvider>
     </body>
