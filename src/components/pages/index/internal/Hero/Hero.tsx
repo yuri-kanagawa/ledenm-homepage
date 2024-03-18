@@ -7,7 +7,7 @@ export const Hero: React.FC = () => {
   const { width } = useWindowSize()
   return (
     <Box sx={{ backgroundColor: 'black' }} height={getMovieHeight(width)}>
-      <video width={'100%'} height={getMovieHeight(width)} autoPlay muted>
+      <video width={'100%'} height={getMovieHeight(width)} autoPlay muted playsInline>
         <source src='/movie/op.mp4' type='video/mp4' />
       </video>
     </Box>
