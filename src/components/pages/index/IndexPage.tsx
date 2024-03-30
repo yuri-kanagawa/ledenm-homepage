@@ -1,5 +1,4 @@
 'use client'
-import { Header } from 'src/components/feature/Header'
 import { Hero } from './internal/Hero'
 import { AppList } from './internal/AppList'
 import { SnsLink } from './internal/SnsLink'
@@ -9,6 +8,8 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 import { scrollYState } from 'src/stores/scrollY/scrollYContext'
 import { langState } from 'src/stores/lang/langContext'
 import { LanguageType } from 'src/constants/languages'
+import { Box } from '@mui/material'
+import { Header } from 'src/components/feature/Header'
 
 
 type Props = {
@@ -37,10 +38,12 @@ function IndexPage(props: Props) {
   return (
     <>
       <Header />
-      <Hero />
-      <AppList />
-      <SnsLink />
-      <Footer />
+      <Box sx={{ overflow: 'hidden' }}>
+        <Hero />
+        <AppList />
+        <SnsLink />
+        <Footer />
+      </Box>
     </>
   )
 }

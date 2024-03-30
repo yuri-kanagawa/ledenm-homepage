@@ -1,7 +1,6 @@
 'use client'
 import { AppBar, Box, Fade, Stack, Toolbar } from '@mui/material'
 import React, { useMemo, useState } from 'react'
-import { useLocale } from 'src/hooks/useLocal'
 import Image from 'next/image'
 import IconButton from '@mui/material/IconButton'
 import { scrollToTop } from 'src/utils/scroll'
@@ -15,7 +14,6 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { HeaderRight } from 'src/components/feature/Header/internal/HeaderRight/HeaderRight'
 
 export const Header: React.FC = () => {
-  const { t } = useLocale()
   const scrollY = useRecoilValue(scrollYState)
   const { height } = useWindowSize()
   const { isMobileSize } = useMediaQuerySize()
@@ -37,11 +35,10 @@ export const Header: React.FC = () => {
               ? 'black'
               : isBackgroundBlack
                 ? 'transparent'
-                : 'white',
-          width: '100vw',
-          overflow: 'hidden'
+                : 'white'
         }}
         position='sticky'
+
       >
         <Toolbar sx={{ my: 1 }}>
           <IconButton onClick={scrollToTop}>
@@ -67,15 +64,16 @@ export const Header: React.FC = () => {
           ) : (
             <HeaderRight isBackgroundBlack={isBackgroundBlack} />
           )}
-        </Toolbar>
 
-        {isMobileWithOpenMenu && (
-          <Fade in={isMobileWithOpenMenu}>
-            <Stack spacing={2} px={5} pb={2}>
-              <HeaderRight isBackgroundBlack={isBackgroundBlack} />
-            </Stack>
-          </Fade>
-        )}
+
+          {isMobileWithOpenMenu && (
+            <Fade in={isMobileWithOpenMenu}>
+              <Stack spacing={2} px={5} pb={2}>
+                <HeaderRight isBackgroundBlack={isBackgroundBlack} />
+              </Stack>
+            </Fade>
+          )}
+        </Toolbar>
       </AppBar>
     </>
   )

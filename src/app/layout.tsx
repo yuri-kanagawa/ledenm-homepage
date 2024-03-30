@@ -18,7 +18,6 @@ export default function RootLayout({
     <body
       style={{
         background: 'black',
-        overflowX: 'hidden',
         width: '100%',
         height: '100%',
         padding: 0,
