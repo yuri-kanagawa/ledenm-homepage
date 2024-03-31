@@ -1,5 +1,5 @@
 'use client'
-import { AppBar, Fade, Grid, Stack, Toolbar } from '@mui/material'
+import { AppBar, ClickAwayListener, Fade, Grid, Stack, Toolbar } from '@mui/material'
 import React, { useMemo, useState } from 'react'
 import Image from 'next/image'
 import IconButton from '@mui/material/IconButton'
@@ -24,9 +24,11 @@ export const Header: React.FC = () => {
 
   const onClickMenu = () => setIsOpen(!isOpen)
 
+  const onClickClose = () => setIsOpen(false)
+
   const isMobileWithOpenMenu = isOpen && isMobileSize
   return (
-    <>
+    <ClickAwayListener onClickAway={onClickClose}>
       <AppBar
         sx={{
           backgroundColor:
