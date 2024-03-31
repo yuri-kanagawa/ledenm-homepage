@@ -15,11 +15,11 @@ import { HeaderRight } from 'src/components/feature/Header/internal/HeaderRight/
 
 export const Header: React.FC = () => {
   const scrollY = useRecoilValue(scrollYState)
-  const { height } = useWindowSize()
+  const { width } = useWindowSize()
   const { isMobileSize } = useMediaQuerySize()
   const isBackgroundBlack = useMemo(() => {
-    return scrollY < getMovieHeight(height) - 30
-  }, [height, scrollY])
+    return scrollY < getMovieHeight(width)
+  }, [width, scrollY])
   const [isOpen, setIsOpen] = useState(false)
 
   const onClickMenu = () => setIsOpen(!isOpen)
