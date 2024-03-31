@@ -91,6 +91,6 @@ export const Header: React.FC = () => {
 
         </Toolbar>
       </AppBar>
-    </>
+    </ClickAwayListener>
   )
 }
