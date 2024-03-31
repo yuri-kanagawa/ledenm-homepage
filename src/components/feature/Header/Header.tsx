@@ -18,9 +18,9 @@ export const Header: React.FC = () => {
   const { height } = useWindowSize()
   const { isMobileSize } = useMediaQuerySize()
   const isBackgroundBlack = useMemo(() => {
-    return scrollY < getMovieHeight(height)
+    return scrollY < getMovieHeight(height) - 30
   }, [height, scrollY])
-
+  console.log(isBackgroundBlack)
   const [isOpen, setIsOpen] = useState(false)
 
   const onClickMenu = () => setIsOpen(!isOpen)
