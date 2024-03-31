@@ -1,5 +1,5 @@
 'use client'
-import { AppBar, Box, Fade, Stack, Toolbar } from '@mui/material'
+import { AppBar, Box, ClickAwayListener, Fade, Grid, Stack, Toolbar } from '@mui/material'
 import React, { useMemo, useState } from 'react'
 import Image from 'next/image'
 import IconButton from '@mui/material/IconButton'
@@ -20,14 +20,13 @@ export const Header: React.FC = () => {
   const isBackgroundBlack = useMemo(() => {
     return scrollY < getMovieHeight(height) - 30
   }, [height, scrollY])
-  console.log(isBackgroundBlack)
   const [isOpen, setIsOpen] = useState(false)
 
   const onClickMenu = () => setIsOpen(!isOpen)
 
   const isMobileWithOpenMenu = isOpen && isMobileSize
   return (
-    <>
+    <ClickAwayListener onClickAway={() => setIsOpen(false)}>
       <AppBar
         sx={{
           backgroundColor:
@@ -40,8 +39,8 @@ export const Header: React.FC = () => {
         position='sticky'
 
       >
-        <Toolbar sx={{ my: 1 }}>
-          <IconButton onClick={scrollToTop}>
+        <Toolbar>
+          {!isMobileWithOpenMenu && <IconButton onClick={scrollToTop}>
             <Image
               src='icon/lily.svg'
               alt={'Home'}
@@ -49,32 +48,35 @@ export const Header: React.FC = () => {
               height='60'
               style={{ filter: isBackgroundBlack ? 'invert(100%)' : '' }}
             />
-          </IconButton>
-          <Box flexGrow={1} />
-          {isMobileSize ? (
-            <IconButton
-              size='large'
-              edge='start'
-              sx={{ color: isBackgroundBlack ? 'white' : 'black' }}
-              aria-label='menu'
-              onClick={onClickMenu}
-            >
-              <MenuIcon />
-            </IconButton>
-          ) : (
-            <HeaderRight isBackgroundBlack={isBackgroundBlack} />
-          )}
-
+          </IconButton>}
+          {!isMobileWithOpenMenu && <>
+            <Box flexGrow={1} />
+            {isMobileSize ? (
+              <IconButton
+                size='large'
+                edge='start'
+                sx={{ color: isBackgroundBlack ? 'white' : 'black' }}
+                aria-label='menu'
+                onClick={onClickMenu}
+              >
+                <MenuIcon />
+              </IconButton>
+            ) : (
+              <Grid container justifyContent='flex-end' alignItems='center'>
+                <HeaderRight isBackgroundBlack={isBackgroundBlack} />
+              </Grid>
+            )}
+          </>}
 
           {isMobileWithOpenMenu && (
             <Fade in={isMobileWithOpenMenu}>
-              <Stack spacing={2} px={5} pb={2}>
+              <Stack spacing={2} py={2} sx={{ width: '100%' }}>
                 <HeaderRight isBackgroundBlack={isBackgroundBlack} />
               </Stack>
             </Fade>
           )}
         </Toolbar>
       </AppBar>
-    </>
+    </ClickAwayListener>
   )
 }
