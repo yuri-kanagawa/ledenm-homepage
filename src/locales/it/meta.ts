@@ -8,7 +8,7 @@ const LOCALE_URL = `${BASE_URL}/it`
 export const meta: Metadata = {
   title: LEDENM,
   description: DESCRIPTION,
-  metadataBase: new URL(LOCALE_URL),
+  metadataBase: new URL(BASE_URL),
   openGraph: {
     title: LEDENM,
     description: DESCRIPTION,

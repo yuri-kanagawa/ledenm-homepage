@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { BASE_URL, LEDENM } from 'src/constants/ledenm'
-import ogImage from 'src/app/opengraph-image.png'
+import ogImage from 'src/app/[locale]/opengraph-image.png'
 
 const DESCRIPTION = 'LEDENM が作ったアプリの紹介ページ'
 const LOCALE_URL = `${BASE_URL}/ja`
@@ -8,7 +8,7 @@ const LOCALE_URL = `${BASE_URL}/ja`
 export const meta: Metadata = {
   title: LEDENM,
   description: DESCRIPTION,
-  metadataBase: new URL(LOCALE_URL),
+  metadataBase: new URL(BASE_URL),
   openGraph: {
     title: LEDENM,
     description: DESCRIPTION,
