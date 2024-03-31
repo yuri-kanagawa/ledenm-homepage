@@ -1,5 +1,5 @@
 'use client'
-import { AppBar, Box, ClickAwayListener, Fade, Grid, Stack, Toolbar } from '@mui/material'
+import { AppBar, Fade, Grid, Stack, Toolbar } from '@mui/material'
 import React, { useMemo, useState } from 'react'
 import Image from 'next/image'
 import IconButton from '@mui/material/IconButton'
@@ -26,7 +26,7 @@ export const Header: React.FC = () => {
 
   const isMobileWithOpenMenu = isOpen && isMobileSize
   return (
-    <ClickAwayListener onClickAway={() => setIsOpen(false)}>
+    <>
       <AppBar
         sx={{
           backgroundColor:
@@ -40,43 +40,55 @@ export const Header: React.FC = () => {
 
       >
         <Toolbar>
-          {!isMobileWithOpenMenu && <IconButton onClick={scrollToTop}>
-            <Image
-              src='icon/lily.svg'
-              alt={'Home'}
-              width='60'
-              height='60'
-              style={{ filter: isBackgroundBlack ? 'invert(100%)' : '' }}
-            />
-          </IconButton>}
-          {!isMobileWithOpenMenu && <>
-            <Box flexGrow={1} />
-            {isMobileSize ? (
-              <IconButton
-                size='large'
-                edge='start'
-                sx={{ color: isBackgroundBlack ? 'white' : 'black' }}
-                aria-label='menu'
-                onClick={onClickMenu}
-              >
-                <MenuIcon />
+          {!isMobileSize &&
+            <>
+              <IconButton onClick={scrollToTop}>
+                <Image
+                  src='icon/lily.svg'
+                  alt={'Home'}
+                  width='60'
+                  height='60'
+                  style={{ filter: isBackgroundBlack ? 'invert(100%)' : '' }}
+                />
               </IconButton>
-            ) : (
               <Grid container justifyContent='flex-end' alignItems='center'>
                 <HeaderRight isBackgroundBlack={isBackgroundBlack} />
               </Grid>
-            )}
-          </>}
+            </>}
 
-          {isMobileWithOpenMenu && (
-            <Fade in={isMobileWithOpenMenu}>
-              <Stack spacing={2} py={2} sx={{ width: '100%' }}>
-                <HeaderRight isBackgroundBlack={isBackgroundBlack} />
-              </Stack>
-            </Fade>
+          {isMobileSize && (
+            <Stack spacing={2} py={2} sx={{ width: '100%' }}>
+              <Grid container justifyContent={'space-between'}>
+                <Image
+                  src='icon/lily.svg'
+                  alt={'Home'}
+                  width='60'
+                  height='60'
+                  style={{ filter: isBackgroundBlack ? 'invert(100%)' : '' }}
+                />
+                <IconButton
+                  size='large'
+                  edge='start'
+                  sx={{ color: isBackgroundBlack ? 'white' : 'black' }}
+                  aria-label='menu'
+                  onClick={onClickMenu}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Grid>
+              {isMobileWithOpenMenu && (
+                <Fade in={isMobileWithOpenMenu}>
+                  <Stack spacing={2} py={2} sx={{ width: '100%' }}>
+
+                    <HeaderRight isBackgroundBlack={isBackgroundBlack} />
+                  </Stack>
+                </Fade>
+              )}
+            </Stack>
           )}
+
         </Toolbar>
       </AppBar>
-    </ClickAwayListener>
+    </>
   )
 }
