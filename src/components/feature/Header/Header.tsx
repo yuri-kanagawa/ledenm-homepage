@@ -85,20 +85,9 @@ export const Header: React.FC<Props> = (props: Props) => {
         </Toolbar>
         <Collapse in={isMobileWithOpenMenu}>
           <Toolbar>
-            {isMobileSize && (
-              <Stack spacing={2} py={2} sx={{ width: '100%' }}>
-
-                {isMobileWithOpenMenu && (
-                  <Collapse in={isMobileWithOpenMenu}>
-                    <Stack spacing={2} py={2} sx={{ width: '100%' }}>
-
-                      <HeaderRight isBackgroundBlack={isBackgroundBlack} />
-                    </Stack>
-                  </Collapse>
-                )}
-              </Stack>
-            )}
-
+            <Stack spacing={2} py={2} sx={{ width: '100%' }}>
+              <HeaderRight isBackgroundBlack={isBackgroundBlack} />
+            </Stack>
           </Toolbar>
         </Collapse>
       </AppBar>
