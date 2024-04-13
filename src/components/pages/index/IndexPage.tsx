@@ -3,7 +3,7 @@ import { Hero } from './internal/Hero'
 import { AppList } from './internal/AppList'
 import { SnsLink } from './internal/SnsLink'
 import { Footer } from 'src/components/feature/Footer'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { scrollYState } from 'src/stores/scrollY/scrollYContext'
 import { langState } from 'src/stores/lang/langContext'
@@ -35,10 +35,14 @@ function IndexPage(props: Props) {
       setLang(locale as LanguageType)
     }
   }, [lang, locale, setLang])
+
+
+  const [isOpen, setIsOpen] = useState(false)
+  const onClickClose = () => setIsOpen(false)
   return (
     <>
-      <Header />
-      <Box sx={{ overflow: 'hidden' }}>
+      <Header isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Box sx={{ overflow: 'hidden' }} onClick={onClickClose}>
         <Hero />
         <AppList />
         <SnsLink />
