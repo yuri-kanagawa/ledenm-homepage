@@ -1,6 +1,2 @@
-export * from './generateApps'
-export * from './generateSns'
 export * from './generateLocal'
 export * from './getLocalFile'
-export * from './locale'
-export * from './generateMeta'

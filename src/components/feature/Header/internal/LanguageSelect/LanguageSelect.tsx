@@ -1,15 +1,13 @@
 'use client'
 
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
-import { langState } from 'src/stores/lang/langContext'
 import TranslateIcon from '@mui/icons-material/Translate'
-import { useRecoilState } from 'recoil'
+import { useLocale } from 'src/hooks/useLocal'
+import { Language } from 'src/domains/valueObjects/language/Language'
 import React, { useCallback } from 'react'
 
 // import { StyledSelect } from 'src/components/feature/styled/select/StyledSelect'
 import { menuItemStyle } from 'src/components/feature/Header/internal/LanguageSelect/utils'
-import { LanguageList } from 'src/utils/locales'
-import { LANGUAGES, LanguageType } from 'src/constants/languages'
 import { theme } from 'src/stores/thema/thema'
 
 type Props = {
@@ -17,12 +15,17 @@ type Props = {
 }
 export const LanguageSelect: React.FC<Props> = (props) => {
   const { isBackgroundBlack } = props
-  const [lang, setLang] = useRecoilState(langState)
+  const { language, setLanguage } = useLocale()
   const handleChange = useCallback(
-    (event: SelectChangeEvent<unknown>) =>
-      setLang(event.target.value as LanguageType),
-    [setLang]
+    (event: SelectChangeEvent<unknown>) => {
+      const newLanguage = Language.create(event.target.value as string)
+      setLanguage(newLanguage)
+    },
+    [setLanguage]
   )
+
+  const languageDisplayNames = Language.getLanguageDisplayNames()
+  const currentLanguageValue = language.value
 
   return (
     <FormControl>
@@ -36,13 +39,14 @@ export const LanguageSelect: React.FC<Props> = (props) => {
       {/*>*/}
       {/*  {LanguageList.map((e, index) => (*/}
       {/*    <MenuItem key={index} value={e} sx={menuItemStyle}>*/}
-      {/*      {LANGUAGES[e]}*/}
+      {/*      {languageDisplayNames[e]}*/}
       {/*    </MenuItem>*/}
       {/*  ))}*/}
       {/*</StyledSelect>*/}
       <Select
         sx={{
-          minWidth: 200, height: 50,
+          minWidth: 200,
+          height: 50,
           color: theme.palette.primary.main,
           backgroundColor: theme.palette.primary.contrastText,
           '&.MuiOutlinedInput-root': {
@@ -59,13 +63,13 @@ export const LanguageSelect: React.FC<Props> = (props) => {
           }
         }}
         onChange={handleChange}
-        value={lang}
+        value={currentLanguageValue}
         startAdornment={<TranslateIcon />}
         inputProps={{ MenuProps: { disableScrollLock: true } }}
       >
-        {LanguageList.map((e, index) => (
+        {Language.LANGUAGE_LIST.map((e, index) => (
           <MenuItem key={index} value={e} sx={menuItemStyle}>
-            {LANGUAGES[e]}
+            {languageDisplayNames[e]}
           </MenuItem>
         ))}
       </Select>

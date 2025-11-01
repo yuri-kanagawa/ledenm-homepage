@@ -25,7 +25,7 @@ export const AppList = () => {
     >
       <Stack spacing={2}>
         <Typography sx={{ textAlign: 'center', fontSize: 40, mb: 2 }}>
-          {t.app}
+          {t.words.app}
         </Typography>
         <Grid
           container

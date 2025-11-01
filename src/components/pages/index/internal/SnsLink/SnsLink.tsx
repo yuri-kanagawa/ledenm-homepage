@@ -50,7 +50,7 @@ export const SnsLink = () => {
       <Typography
         sx={{ textAlign: 'center', fontSize: 40, mb: 2, color: 'white' }}
       >
-        {t.contact}
+        {t.words.contact}
       </Typography>
       <Grid
         container

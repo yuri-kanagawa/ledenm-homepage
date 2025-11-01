@@ -4,22 +4,21 @@ import { AppList } from './internal/AppList'
 import { SnsLink } from './internal/SnsLink'
 import { Footer } from 'src/components/feature/Footer'
 import { useEffect, useState } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { scrollYState } from 'src/stores/scrollY/scrollYContext'
-import { langState } from 'src/stores/lang/langContext'
-import { LanguageType } from 'src/constants/languages'
+import { Language } from 'src/domains/valueObjects/language/Language'
+import { useLocale } from 'src/hooks/useLocal'
 import { Box } from '@mui/material'
 import { Header } from 'src/components/feature/Header'
 
 
 type Props = {
-  locale?: string
+  language: Language
 }
 
 function IndexPage(props: Props) {
-  const locale = props.locale
   const setScrollY = useSetRecoilState(scrollYState)
-  const [lang, setLang] = useRecoilState(langState)
+  const { language, setLanguage } = useLocale()
   useEffect(() => {
     const handleScroll = () => {
       const newY = window.scrollY
@@ -31,10 +30,10 @@ function IndexPage(props: Props) {
     }
   }, [setScrollY])
   useEffect(() => {
-    if (locale != undefined && locale != lang) {
-      setLang(locale as LanguageType)
+    if (props.language && props.language.value !== language.value) {
+      setLanguage(props.language)
     }
-  }, [lang, locale, setLang])
+  }, [language.value, props.language, setLanguage])
 
 
   const [isOpen, setIsOpen] = useState(false)

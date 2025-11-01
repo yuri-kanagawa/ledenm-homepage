@@ -8,7 +8,7 @@ import { id } from 'src/locales/id'
 import { it } from 'src/locales/it'
 import { ko } from 'src/locales/ko'
 import { pt } from 'src/locales/pt'
-import { ru } from 'src/locales/ru/ru'
+import { ru } from 'src/locales/ru'
 import { zh } from 'src/locales/zh'
 import { LocalConstType } from 'src/utils/locales'
 

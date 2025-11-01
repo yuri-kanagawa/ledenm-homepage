@@ -14,10 +14,10 @@ export const HeaderRight: React.FC<Props> = ({ isBackgroundBlack }) => {
   return (
     <>
       <Typography sx={{ ...getTextStyle(isBackgroundBlack), mr: 2, textAlign: 'center' }}>
-        <Scroll to={scrollHome.app} smooth={true} text={t.app} />
+        <Scroll to={scrollHome.app} smooth={true} text={t.words.app} />
       </Typography>
       <Typography sx={{ ...getTextStyle(isBackgroundBlack), mr: 2, textAlign: 'center' }}>
-        <Scroll to={scrollHome.contact} smooth={true} text={t.contact} />
+        <Scroll to={scrollHome.contact} smooth={true} text={t.words.contact} />
       </Typography>
       <LanguageSelect isBackgroundBlack={isBackgroundBlack} />
     </>

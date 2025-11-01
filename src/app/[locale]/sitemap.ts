@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { BASE_URL } from 'src/constants/ledenm'
-import { getIsEnglish } from 'src/utils/locales'
+import { Language } from 'src/domains/valueObjects/language/Language'
 
 
 export default async function sitemap({
@@ -8,7 +8,8 @@ export default async function sitemap({
                                       }: {
   locale: string
 }): Promise<MetadataRoute.Sitemap> {
-  const uri = getIsEnglish(locale) ? `/${locale}` : ''
+  const language = Language.create(locale)
+  const uri = language.isEnglish() ? `/${locale}` : ''
   return [
     {
       url: `${BASE_URL}${uri}`,

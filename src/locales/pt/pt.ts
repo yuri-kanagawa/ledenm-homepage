@@ -1,7 +1,11 @@
-import { generateLocal } from 'src/utils/locales'
-import { words } from './words'
 import { apps } from './app'
+import { words } from './words'
 import { sns } from './sns'
 import { meta } from './meta'
 
-export const pt = generateLocal(words, apps, sns, meta)
+export const pt = {
+  words,
+  apps,
+  sns,
+  meta
+} as const
