@@ -47,6 +47,22 @@ export class Language {
     [Language.ZH]: '简体中文'
   } as const
 
+  private static readonly LOCALE_MAP = {
+    [Language.AR]: () => require('src/locales/ar').ar,
+    [Language.DE]: () => require('src/locales/de').de,
+    [Language.EN]: () => require('src/locales/en').en,
+    [Language.ES]: () => require('src/locales/es').es,
+    [Language.FR]: () => require('src/locales/fr').fr,
+    [Language.HI]: () => require('src/locales/hi').hi,
+    [Language.ID]: () => require('src/locales/id').id,
+    [Language.IT]: () => require('src/locales/it').it,
+    [Language.JA]: () => require('src/locales/ja').ja,
+    [Language.KO]: () => require('src/locales/ko').ko,
+    [Language.PT]: () => require('src/locales/pt').pt,
+    [Language.RU]: () => require('src/locales/ru').ru,
+    [Language.ZH]: () => require('src/locales/zh').zh
+  } as const
+
   private readonly _value: typeof Language.CODES[keyof typeof Language.CODES]
 
   private constructor(value: typeof Language.CODES[keyof typeof Language.CODES]) {
@@ -59,36 +75,7 @@ export class Language {
 
   get locale(): LocalConstType {
     // 直接ロケールを取得して循環依存を回避
-    switch (this._value) {
-      case 'ar':
-        return require('src/locales/ar').ar
-      case 'de':
-        return require('src/locales/de').de
-      case 'en':
-        return require('src/locales/en').en
-      case 'es':
-        return require('src/locales/es').es
-      case 'fr':
-        return require('src/locales/fr').fr
-      case 'hi':
-        return require('src/locales/hi').hi
-      case 'id':
-        return require('src/locales/id').id
-      case 'it':
-        return require('src/locales/it').it
-      case 'ja':
-        return require('src/locales/ja').ja
-      case 'ko':
-        return require('src/locales/ko').ko
-      case 'pt':
-        return require('src/locales/pt').pt
-      case 'ru':
-        return require('src/locales/ru').ru
-      case 'zh':
-        return require('src/locales/zh').zh
-      default:
-        return require('src/locales/en').en
-    }
+    return Language.LOCALE_MAP[this._value]()
   }
 
   static create(value: string): Language {
