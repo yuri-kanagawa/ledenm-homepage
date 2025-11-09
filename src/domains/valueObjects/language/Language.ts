@@ -125,9 +125,13 @@ export class Language {
     return Language.isAvailableLanguage(value)
   }
 
-  public static generateStaticParams() {
-    return Language.LANGUAGE_LIST.map((e) => ({
-      locale: e
+  public static generatePages() {
+    return Language.LANGUAGE_LIST.filter((code) => code !== Language.EN).map((code) => ({
+      language: code
     }))
+  }
+
+  public static default(): Language {
+    return Language.create(Language.EN)
   }
 }
