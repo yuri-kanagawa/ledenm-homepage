@@ -43,10 +43,10 @@ export const LanguageSelect: React.FC<Props> = ({
   return (
     <Autocomplete
       options={options}
-      value={currentOption || undefined}
+      value={currentOption ?? undefined}
       onChange={handleChange}
       getOptionLabel={(option) => option.label}
-      isOptionEqualToValue={(option, value) => option.code === value.code}
+      isOptionEqualToValue={(option, value) => option?.code === value?.code}
       renderInput={(params) => (
         <TextField
           {...params}

@@ -1,4 +1,3 @@
-import { getLocalFile } from 'src/utils/locales/'
 import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
 import { Language } from 'src/domains/valueObjects/language/Language'
@@ -19,8 +18,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const language = Language.create(params.language)
-  const t = getLocalFile(language.toString())
-  return t.meta
+  return language.locale.meta
 }
 
 export default function Layout({

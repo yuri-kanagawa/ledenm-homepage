@@ -5,8 +5,6 @@ import { LanguageSelect } from 'src/components/feature/Header/internal/LanguageS
 import React from 'react'
 import { Typography } from '@mui/material'
 import { Language } from 'src/domains/valueObjects/language/Language'
-import { getLocalFile } from 'src/utils/locales'
-
 type HeaderRightProps = {
   isBackgroundBlack: boolean
   language: Language

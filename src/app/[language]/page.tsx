@@ -6,10 +6,8 @@ export default function Page({
   params
 }: {
   params: {
-    language: string
+    language: (typeof Language.LANGUAGE_LIST)[number]
   }
 }) {
-  const language = Language.create(params.language)
-
-  return <IndexPage language={language} />
+  return <IndexPage languageCode={params.language} />
 }

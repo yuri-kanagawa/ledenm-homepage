@@ -12,7 +12,7 @@ import { Box } from '@mui/material'
 import { Header } from 'src/components/feature/Header'
 
 type Props = {
-  language: Language
+  languageCode: (typeof Language.LANGUAGE_LIST)[number]
 }
 
 function IndexPage(props: Props) {
@@ -29,10 +29,11 @@ function IndexPage(props: Props) {
     }
   }, [setScrollY])
   useEffect(() => {
-    if (props.language && props.language.value !== language.value) {
-      setLanguage(props.language)
+    const propLanguage = Language.create(props.languageCode)
+    if (propLanguage && propLanguage.value !== language.value) {
+      setLanguage(propLanguage)
     }
-  }, [language.value, props.language, setLanguage])
+  }, [language.value, props.languageCode, setLanguage])
 
   const [isOpen, setIsOpen] = useState(false)
   const onClickClose = () => setIsOpen(false)

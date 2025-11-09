@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const AppList = ({ language }: Props) => {
-  const locale = language.locale
+  const { words } = language.locale
   const apps = language.apps
   const { isDesktopSize, isLaptopSize, isTabletSize } = useMediaQuerySize()
 
@@ -29,7 +29,7 @@ export const AppList = ({ language }: Props) => {
     >
       <Stack spacing={2}>
         <Typography sx={{ textAlign: 'center', fontSize: 40, mb: 2 }}>
-          {locale.words.app}
+          {words.app}
         </Typography>
         <Grid
           container

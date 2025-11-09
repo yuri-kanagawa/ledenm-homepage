@@ -1,5 +1,18 @@
-import { LocalConstType } from 'src/utils/locales'
+import { LocalConstType } from 'src/utils/locales/generateLocal'
 import { AppType } from 'src/locales/en/app'
+import { en } from 'src/locales/en'
+import { ja } from 'src/locales/ja'
+import { ar } from 'src/locales/ar'
+import { de } from 'src/locales/de'
+import { es } from 'src/locales/es'
+import { fr } from 'src/locales/fr'
+import { hi } from 'src/locales/hi'
+import { id } from 'src/locales/id'
+import { it } from 'src/locales/it'
+import { ko } from 'src/locales/ko'
+import { pt } from 'src/locales/pt'
+import { ru } from 'src/locales/ru'
+import { zh } from 'src/locales/zh'
 
 export class Language {
   private static readonly CODES = {
@@ -32,6 +45,25 @@ export class Language {
   public static readonly RU = Language.CODES.RU
   public static readonly ZH = Language.CODES.ZH
 
+  private static readonly LOCALE_MAP: Record<
+    typeof Language.CODES[keyof typeof Language.CODES],
+    () => LocalConstType
+  > = {
+    [Language.AR]: () => ar,
+    [Language.DE]: () => de,
+    [Language.EN]: () => en,
+    [Language.ES]: () => es,
+    [Language.FR]: () => fr,
+    [Language.HI]: () => hi,
+    [Language.ID]: () => id,
+    [Language.IT]: () => it,
+    [Language.JA]: () => ja,
+    [Language.KO]: () => ko,
+    [Language.PT]: () => pt,
+    [Language.RU]: () => ru,
+    [Language.ZH]: () => zh
+  }
+
   private static readonly LANGUAGE_DISPLAY_NAMES = {
     [Language.AR]: 'عربي',
     [Language.DE]: 'Deutsch',
@@ -48,26 +80,13 @@ export class Language {
     [Language.ZH]: '简体中文'
   } as const
 
-  private static readonly LOCALE_MAP = {
-    [Language.AR]: () => require('src/locales/ar').ar,
-    [Language.DE]: () => require('src/locales/de').de,
-    [Language.EN]: () => require('src/locales/en').en,
-    [Language.ES]: () => require('src/locales/es').es,
-    [Language.FR]: () => require('src/locales/fr').fr,
-    [Language.HI]: () => require('src/locales/hi').hi,
-    [Language.ID]: () => require('src/locales/id').id,
-    [Language.IT]: () => require('src/locales/it').it,
-    [Language.JA]: () => require('src/locales/ja').ja,
-    [Language.KO]: () => require('src/locales/ko').ko,
-    [Language.PT]: () => require('src/locales/pt').pt,
-    [Language.RU]: () => require('src/locales/ru').ru,
-    [Language.ZH]: () => require('src/locales/zh').zh
-  } as const
-
   private readonly _value: typeof Language.CODES[keyof typeof Language.CODES]
+  private readonly _locale: LocalConstType
 
   private constructor(value: typeof Language.CODES[keyof typeof Language.CODES]) {
     this._value = value
+    const resolver = Language.LOCALE_MAP[value] ?? Language.LOCALE_MAP[Language.EN]
+    this._locale = resolver()
   }
 
   get value(): typeof Language.CODES[keyof typeof Language.CODES] {
@@ -75,8 +94,7 @@ export class Language {
   }
 
   get locale(): LocalConstType {
-    // 直接ロケールを取得して循環依存を回避
-    return Language.LOCALE_MAP[this._value]()
+    return this._locale
   }
 
   get apps(): AppType[] {
