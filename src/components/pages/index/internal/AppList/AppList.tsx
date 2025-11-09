@@ -1,14 +1,18 @@
 'use client'
 import { Box, Grid, Stack, Typography } from '@mui/material'
 import { AppCard } from './internal/AppCard'
-import { getAppList } from './utils'
-import { useLocale } from 'src/hooks/useLocal'
 import { useMemo } from 'react'
 import { useMediaQuerySize } from 'src/hooks/useMediaQuerySize'
 import { scrollHome } from 'src/constants/scroll'
+import { Language } from 'src/domains/valueObjects/language/Language'
 
-export const AppList = () => {
-  const { t } = useLocale()
+type Props = {
+  language: Language
+}
+
+export const AppList = ({ language }: Props) => {
+  const locale = language.locale
+  const apps = language.apps
   const { isDesktopSize, isLaptopSize, isTabletSize } = useMediaQuerySize()
 
   const columnSpacing = useMemo(() => {
@@ -25,15 +29,15 @@ export const AppList = () => {
     >
       <Stack spacing={2}>
         <Typography sx={{ textAlign: 'center', fontSize: 40, mb: 2 }}>
-          {t.words.app}
+          {locale.words.app}
         </Typography>
         <Grid
           container
           sx={{ justifyContent: 'center', pb: 4 }}
           columnSpacing={columnSpacing}
         >
-          {getAppList(t).map((e, index) => (
-            <AppCard key={index} appName={e.name} explain={e.explain} />
+          {apps.map((app, index) => (
+            <AppCard key={index} appName={app.name} explain={app.explain} />
           ))}
         </Grid>
       </Stack>

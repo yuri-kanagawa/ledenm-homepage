@@ -11,7 +11,6 @@ import { useLocale } from 'src/hooks/useLocal'
 import { Box } from '@mui/material'
 import { Header } from 'src/components/feature/Header'
 
-
 type Props = {
   language: Language
 }
@@ -35,16 +34,15 @@ function IndexPage(props: Props) {
     }
   }, [language.value, props.language, setLanguage])
 
-
   const [isOpen, setIsOpen] = useState(false)
   const onClickClose = () => setIsOpen(false)
   return (
     <>
-      <Header isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Header language={language} isOpen={isOpen} setIsOpen={setIsOpen} />
       <Box sx={{ overflow: 'hidden' }} onClick={onClickClose}>
         <Hero />
-        <AppList />
-        <SnsLink />
+        <AppList language={language} />
+        <SnsLink language={language} />
         <Footer />
       </Box>
     </>

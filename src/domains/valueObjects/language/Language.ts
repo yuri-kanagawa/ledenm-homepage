@@ -1,4 +1,5 @@
 import { LocalConstType } from 'src/utils/locales'
+import { AppType } from 'src/locales/en/app'
 
 export class Language {
   private static readonly CODES = {
@@ -76,6 +77,11 @@ export class Language {
   get locale(): LocalConstType {
     // 直接ロケールを取得して循環依存を回避
     return Language.LOCALE_MAP[this._value]()
+  }
+
+  get apps(): AppType[] {
+    const { apps } = this.locale
+    return Object.values(apps) as AppType[]
   }
 
   static create(value: string): Language {

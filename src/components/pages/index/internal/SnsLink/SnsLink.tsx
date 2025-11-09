@@ -1,7 +1,11 @@
 import { Box, Grid, Typography } from '@mui/material'
-import { AiFillYoutube, AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai'
+import {
+  AiFillYoutube,
+  AiOutlineInstagram,
+  AiOutlineTwitter
+} from 'react-icons/ai'
 import { BsTiktok } from 'react-icons/bs'
-import { useLocale } from 'src/hooks/useLocal'
+import { Language } from 'src/domains/valueObjects/language/Language'
 
 import IconButton from '@mui/material/IconButton'
 import {
@@ -16,8 +20,12 @@ import { useMediaQuerySize } from 'src/hooks/useMediaQuerySize'
 import { IconButtonWhiteStyle } from 'src/style/iconStyle'
 import { scrollHome } from 'src/constants/scroll'
 
-export const SnsLink = () => {
-  const { t } = useLocale()
+type Props = {
+  language: Language
+}
+
+export const SnsLink = ({ language }: Props) => {
+  const t = language.locale
   const { isTabletSize, isMobileSize, isLaptopSize, isOverTabletSize } =
     useMediaQuerySize()
 

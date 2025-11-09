@@ -1,78 +1,99 @@
 'use client'
 
-import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
+import { Autocomplete, TextField } from '@mui/material'
 import TranslateIcon from '@mui/icons-material/Translate'
-import { useLocale } from 'src/hooks/useLocal'
+import { useRouter } from 'next/navigation'
 import { Language } from 'src/domains/valueObjects/language/Language'
+import { PathBuilder } from 'src/lib/routing'
 import React, { useCallback } from 'react'
 
-// import { StyledSelect } from 'src/components/feature/styled/select/StyledSelect'
-import { menuItemStyle } from 'src/components/feature/Header/internal/LanguageSelect/utils'
 import { theme } from 'src/stores/thema/thema'
 
 type Props = {
   isBackgroundBlack: boolean
+  language: Language
 }
-export const LanguageSelect: React.FC<Props> = (props) => {
-  const { isBackgroundBlack } = props
-  const { language, setLanguage } = useLocale()
-  const handleChange = useCallback(
-    (event: SelectChangeEvent<unknown>) => {
-      const newLanguage = Language.create(event.target.value as string)
-      setLanguage(newLanguage)
-    },
-    [setLanguage]
-  )
+export const LanguageSelect: React.FC<Props> = ({
+  isBackgroundBlack,
+  language
+}) => {
+  const router = useRouter()
 
   const languageDisplayNames = Language.getLanguageDisplayNames()
   const currentLanguageValue = language.value
 
+  const options = Language.LANGUAGE_LIST.map((code) => ({
+    code,
+    label: languageDisplayNames[code]
+  }))
+
+  const currentOption = options.find((opt) => opt.code === currentLanguageValue)
+
+  const handleChange = useCallback(
+    (_event: unknown, newValue: { code: string; label: string } | null) => {
+      if (newValue) {
+        const newLanguage = Language.create(newValue.code)
+        const pathBuilder = new PathBuilder(newLanguage)
+        router.push(pathBuilder.buildPath())
+      }
+    },
+    [router]
+  )
+
   return (
-    <FormControl>
-      {/*<StyledSelect*/}
-      {/*  sx={{ minWidth: 200, height: 50 }}*/}
-      {/*  onChange={handleChange}*/}
-      {/*  value={lang}*/}
-      {/*  startAdornment={<TranslateIcon />}*/}
-      {/*  inputProps={{ MenuProps: { disableScrollLock: true } }}*/}
-      {/*  isBackgroundBlack={isBackgroundBlack}*/}
-      {/*>*/}
-      {/*  {LanguageList.map((e, index) => (*/}
-      {/*    <MenuItem key={index} value={e} sx={menuItemStyle}>*/}
-      {/*      {languageDisplayNames[e]}*/}
-      {/*    </MenuItem>*/}
-      {/*  ))}*/}
-      {/*</StyledSelect>*/}
-      <Select
-        sx={{
-          minWidth: 200,
-          height: 50,
-          color: theme.palette.primary.main,
-          backgroundColor: theme.palette.primary.contrastText,
-          '&.MuiOutlinedInput-root': {
-            '&:hover fieldset': {
-              borderColor: isBackgroundBlack
-                ? theme.palette.secondary.contrastText
-                : theme.palette.secondary.main
+    <Autocomplete
+      options={options}
+      value={currentOption || undefined}
+      onChange={handleChange}
+      getOptionLabel={(option) => option.label}
+      isOptionEqualToValue={(option, value) => option.code === value.code}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          InputProps={{
+            ...params.InputProps,
+            startAdornment: (
+              <>
+                <TranslateIcon
+                  sx={{ mr: 1, color: theme.palette.primary.main }}
+                />
+                {params.InputProps.startAdornment}
+              </>
+            )
+          }}
+          sx={{
+            minWidth: 200,
+            '& .MuiOutlinedInput-root': {
+              height: 50,
+              color: theme.palette.primary.main,
+              backgroundColor: theme.palette.primary.contrastText,
+              '&:hover fieldset': {
+                borderColor: isBackgroundBlack
+                  ? theme.palette.secondary.contrastText
+                  : theme.palette.secondary.main
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: isBackgroundBlack
+                  ? theme.palette.secondary.contrastText
+                  : theme.palette.secondary.main
+              }
+            }
+          }}
+        />
+      )}
+      disableClearable
+      ListboxProps={{
+        sx: {
+          '& .MuiAutocomplete-option': {
+            '&.Mui-selected': {
+              backgroundColor: 'silver !important'
             },
-            '&.Mui-focused fieldset': {
-              borderColor: isBackgroundBlack
-                ? theme.palette.secondary.contrastText
-                : theme.palette.secondary.main
+            '&:hover': {
+              backgroundColor: 'silver'
             }
           }
-        }}
-        onChange={handleChange}
-        value={currentLanguageValue}
-        startAdornment={<TranslateIcon />}
-        inputProps={{ MenuProps: { disableScrollLock: true } }}
-      >
-        {Language.LANGUAGE_LIST.map((e, index) => (
-          <MenuItem key={index} value={e} sx={menuItemStyle}>
-            {languageDisplayNames[e]}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+        }
+      }}
+    />
   )
 }
