@@ -9,12 +9,13 @@ export const meta: Metadata = {
   openGraph: {
     title: LEDENM,
     description: DESCRIPTION,
-    images: [{
-      url: OGP_IMAGE_URL,
-      width: ogImage.width,
-      height: ogImage.height
-
-    }]
+    images: [
+      {
+        url: OGP_IMAGE_URL,
+        width: ogImage.width,
+        height: ogImage.height
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
@@ -27,4 +28,3 @@ export const meta: Metadata = {
     ]
   }
 }
-

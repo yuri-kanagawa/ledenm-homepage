@@ -1,7 +1,6 @@
 import { AppsValueType } from '../en'
 import { App } from 'src/constants/app'
 
-
 const get_url = (url: string): string => `${url}/de`
 
 export const apps: AppsValueType = {

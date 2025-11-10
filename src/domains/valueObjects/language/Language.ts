@@ -46,7 +46,7 @@ export class Language {
   public static readonly ZH = Language.CODES.ZH
 
   private static readonly LOCALE_MAP: Record<
-    typeof Language.CODES[keyof typeof Language.CODES],
+    (typeof Language.CODES)[keyof typeof Language.CODES],
     () => LocalConstType
   > = {
     [Language.AR]: () => ar,
@@ -80,16 +80,19 @@ export class Language {
     [Language.ZH]: '简体中文'
   } as const
 
-  private readonly _value: typeof Language.CODES[keyof typeof Language.CODES]
+  private readonly _value: (typeof Language.CODES)[keyof typeof Language.CODES]
   private readonly _locale: LocalConstType
 
-  private constructor(value: typeof Language.CODES[keyof typeof Language.CODES]) {
+  private constructor(
+    value: (typeof Language.CODES)[keyof typeof Language.CODES]
+  ) {
     this._value = value
-    const resolver = Language.LOCALE_MAP[value] ?? Language.LOCALE_MAP[Language.EN]
+    const resolver =
+      Language.LOCALE_MAP[value] ?? Language.LOCALE_MAP[Language.EN]
     this._locale = resolver()
   }
 
-  get value(): typeof Language.CODES[keyof typeof Language.CODES] {
+  get value(): (typeof Language.CODES)[keyof typeof Language.CODES] {
     return this._value
   }
 
@@ -106,11 +109,15 @@ export class Language {
     if (!Language.isAvailableLanguage(value)) {
       throw new Error(`Invalid language: ${value}`)
     }
-    return new Language(value as typeof Language.CODES[keyof typeof Language.CODES])
+    return new Language(
+      value as (typeof Language.CODES)[keyof typeof Language.CODES]
+    )
   }
 
   private static isAvailableLanguage(value: string): boolean {
-    return Object.values(Language.CODES).includes(value as typeof Language.CODES[keyof typeof Language.CODES])
+    return Object.values(Language.CODES).includes(
+      value as (typeof Language.CODES)[keyof typeof Language.CODES]
+    )
   }
 
   public equals(other: Language): boolean {
@@ -137,16 +144,19 @@ export class Language {
     return Language.LANGUAGE_DISPLAY_NAMES
   }
 
-  public static readonly LANGUAGE_LIST: (typeof Language.CODES[keyof typeof Language.CODES])[] = Object.values(Language.CODES)
+  public static readonly LANGUAGE_LIST: (typeof Language.CODES)[keyof typeof Language.CODES][] =
+    Object.values(Language.CODES)
 
   public static isValidCode(value: string): boolean {
     return Language.isAvailableLanguage(value)
   }
 
   public static generatePages() {
-    return Language.LANGUAGE_LIST.filter((code) => code !== Language.EN).map((code) => ({
-      language: code
-    }))
+    return Language.LANGUAGE_LIST.filter((code) => code !== Language.EN).map(
+      (code) => ({
+        language: code
+      })
+    )
   }
 
   public static default(): Language {

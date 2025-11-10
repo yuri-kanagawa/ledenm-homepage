@@ -10,12 +10,12 @@ export type IconSizeMediaType = Pick<
 
 export const createIconSizeCalculator =
   (props: IconSizeMediaType) =>
-    (size: number): number => {
-      if (props.isLaptopSize) return size
-      else if (props.isTabletSize) return size * 0.8
-      else if (props.isMobileSize) return size / 2
-      else return size
-    }
+  (size: number): number => {
+    if (props.isLaptopSize) return size
+    else if (props.isTabletSize) return size * 0.8
+    else if (props.isMobileSize) return size / 2
+    else return size
+  }
 
 export type ColumnSpacingMediaType = Pick<
   MediaQueryType,

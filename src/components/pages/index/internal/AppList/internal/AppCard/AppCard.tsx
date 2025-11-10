@@ -1,9 +1,14 @@
 'use client'
 import React from 'react'
-import { Card, CardActionArea, CardContent, Grid, Typography } from '@mui/material'
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  Grid,
+  Typography
+} from '@mui/material'
 import Image from 'next/image'
 import { useMediaQuerySize } from 'src/hooks/useMediaQuerySize'
-
 
 type Props = {
   appName: string
@@ -22,14 +27,12 @@ export const AppCard: React.FC<Props> = (props) => {
             width={0}
             height={0}
             alt={appName}
-            sizes='100vw'
+            sizes="100vw"
             style={{ width: '100%', height: '80%' }}
           />
           <CardContent sx={{ height: cardHeight }}>
-            <Typography noWrap>
-              {appName}
-            </Typography>
-            <Typography color='text.secondary' noWrap>
+            <Typography noWrap>{appName}</Typography>
+            <Typography color="text.secondary" noWrap>
               {explain}
             </Typography>
           </CardContent>
