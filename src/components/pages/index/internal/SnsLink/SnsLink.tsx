@@ -5,8 +5,6 @@ import {
   AiOutlineTwitter
 } from 'react-icons/ai'
 import { BsTiktok } from 'react-icons/bs'
-import { Language } from 'src/domains/valueObjects/language/Language'
-
 import IconButton from '@mui/material/IconButton'
 import {
   ColumnSpacingMediaType,
@@ -19,13 +17,14 @@ import {
 import { useMediaQuerySize } from 'src/hooks/useMediaQuerySize'
 import { IconButtonWhiteStyle } from 'src/style/iconStyle'
 import { scrollHome } from 'src/constants/scroll'
+import { Locale } from 'src/domains'
 
 type Props = {
-  language: Language
+  locale: Locale
 }
 
-export const SnsLink = ({ language }: Props) => {
-  const t = language.locale
+export const SnsLink = ({ locale }: Props) => {
+  const t = locale.definition
   const { isTabletSize, isMobileSize, isLaptopSize, isOverTabletSize } =
     useMediaQuerySize()
 

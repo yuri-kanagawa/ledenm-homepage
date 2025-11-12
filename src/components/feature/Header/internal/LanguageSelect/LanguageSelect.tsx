@@ -3,37 +3,37 @@
 import { Autocomplete, TextField } from '@mui/material'
 import TranslateIcon from '@mui/icons-material/Translate'
 import { useRouter } from 'next/navigation'
-import { Language } from 'src/domains/valueObjects/language/Language'
-import { PathBuilder } from 'src/lib/routing'
 import React, { useCallback } from 'react'
 
+import { Locale } from 'src/domains'
+import { PathBuilder } from 'src/lib/routing'
 import { theme } from 'src/stores/thema/thema'
 
 type Props = {
   isBackgroundBlack: boolean
-  language: Language
+  locale: Locale
 }
 export const LanguageSelect: React.FC<Props> = ({
   isBackgroundBlack,
-  language
+  locale
 }) => {
   const router = useRouter()
 
-  const languageDisplayNames = Language.getLanguageDisplayNames()
-  const currentLanguageValue = language.value
+  const displayNames = Locale.getDisplayNames()
+  const currentCode = locale.value
 
-  const options = Language.LANGUAGE_LIST.map((code) => ({
+  const options = Locale.LIST.map((code) => ({
     code,
-    label: languageDisplayNames[code]
+    label: displayNames[code]
   }))
 
-  const currentOption = options.find((opt) => opt.code === currentLanguageValue)
+  const currentOption = options.find((opt) => opt.code === currentCode)
 
   const handleChange = useCallback(
     (_event: unknown, newValue: { code: string; label: string } | null) => {
       if (newValue) {
-        const newLanguage = Language.create(newValue.code)
-        const pathBuilder = new PathBuilder(newLanguage)
+        const nextLocale = Locale.create(newValue.code)
+        const pathBuilder = new PathBuilder(nextLocale)
         router.push(pathBuilder.buildPath())
       }
     },

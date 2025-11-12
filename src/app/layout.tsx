@@ -1,9 +1,9 @@
 import AppProvider from 'src/app/provider'
 import React from 'react'
 import { Metadata } from 'next'
-import { en } from 'src/locales/en'
+import { enUs } from 'src/locales/en-US'
 
-export const metadata: Metadata = en.meta
+export const metadata: Metadata = enUs.meta
 
 export default function RootLayout({
   children

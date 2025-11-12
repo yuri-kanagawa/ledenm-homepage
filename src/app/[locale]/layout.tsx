@@ -1,13 +1,13 @@
 import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
-import { Language } from 'src/domains/valueObjects/language/Language'
+import { Locale } from 'src/domains'
 
-type ParamsType = {
+type Params = {
   locale: string
 }
 
-export async function generateStaticParams(): Promise<ParamsType[]> {
-  return Language.generatePages()
+export async function generateStaticParams(): Promise<Params[]> {
+  return Locale.generatePages()
 }
 
 type Props = {
@@ -17,8 +17,8 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const language = Language.create(params.locale)
-  return language.locale.meta
+  const locale = Locale.create(params.locale)
+  return locale.definition.meta
 }
 
 export default function Layout({
@@ -30,9 +30,9 @@ export default function Layout({
     locale: string
   }
 }) {
-  const language = Language.create(params.locale)
+  const locale = Locale.create(params.locale)
 
-  if (language.isEnglish()) return redirect('/')
-  if (!Language.isValidCode(language.toString())) return redirect('/')
+  if (locale.isEnglish()) return redirect('/')
+  if (!Locale.isValidCode(locale.toString())) return redirect('/')
   return <>{children}</>
 }

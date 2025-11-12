@@ -4,15 +4,15 @@ import { AppCard } from './internal/AppCard'
 import { useMemo } from 'react'
 import { useMediaQuerySize } from 'src/hooks/useMediaQuerySize'
 import { scrollHome } from 'src/constants/scroll'
-import { Language } from 'src/domains/valueObjects/language/Language'
+import { Locale } from 'src/domains'
 
 type Props = {
-  language: Language
+  locale: Locale
 }
 
-export const AppList = ({ language }: Props) => {
-  const { words } = language.locale
-  const apps = language.apps
+export const AppList = ({ locale }: Props) => {
+  const { words } = locale.definition
+  const apps = locale.apps
   const { isDesktopSize, isLaptopSize, isTabletSize } = useMediaQuerySize()
 
   const columnSpacing = useMemo(() => {

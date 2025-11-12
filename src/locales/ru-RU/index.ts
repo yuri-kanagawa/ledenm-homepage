@@ -1,0 +1,5 @@
+export { ruRu } from './ru'
+export * from './app'
+export * from './sns'
+export * from './words'
+export * from './meta'

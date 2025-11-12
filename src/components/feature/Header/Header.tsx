@@ -12,15 +12,15 @@ import { useMediaQuerySize } from 'src/hooks/useMediaQuerySize'
 import MenuIcon from '@mui/icons-material/Menu'
 
 import { HeaderRight } from 'src/components/feature/Header/internal/HeaderRight'
-import { Language } from 'src/domains/valueObjects/language/Language'
+import { Locale } from 'src/domains'
 
 type Props = {
   isOpen: boolean
   setIsOpen: (value: boolean) => void
-  language: Language
+  locale: Locale
 }
 
-export const Header: React.FC<Props> = ({ isOpen, setIsOpen, language }) => {
+export const Header: React.FC<Props> = ({ isOpen, setIsOpen, locale }) => {
   const scrollY = useRecoilValue(scrollYState)
   const { width } = useWindowSize()
   const { isMobileSize } = useMediaQuerySize()
@@ -59,7 +59,7 @@ export const Header: React.FC<Props> = ({ isOpen, setIsOpen, language }) => {
               <Grid container justifyContent="flex-end" alignItems="center">
                 <HeaderRight
                   isBackgroundBlack={isBackgroundBlack}
-                  language={language}
+                  locale={locale}
                 />
               </Grid>
             </>
@@ -96,7 +96,7 @@ export const Header: React.FC<Props> = ({ isOpen, setIsOpen, language }) => {
             <Stack spacing={2} py={2} sx={{ width: '100%' }}>
               <HeaderRight
                 isBackgroundBlack={isBackgroundBlack}
-                language={language}
+                locale={locale}
               />
             </Stack>
           </Toolbar>

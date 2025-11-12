@@ -1,3 +1,3 @@
-import { en } from 'src/locales/en'
+import { enUs } from 'src/locales/en-US'
 
-export type LocalConstType = typeof en
+export type TranslationType = typeof enUs

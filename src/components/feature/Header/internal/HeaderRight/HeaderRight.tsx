@@ -1,19 +1,20 @@
-import { Scroll } from 'src/components/feature/Scroll'
-import { scrollHome } from 'src/constants/scroll'
-import { getTextStyle } from 'src/components/feature/Header/utils'
-import { LanguageSelect } from 'src/components/feature/Header/internal/LanguageSelect/'
-import React from 'react'
 import { Typography } from '@mui/material'
-import { Language } from 'src/domains/valueObjects/language/Language'
+import React from 'react'
+import { Scroll } from 'src/components/feature/Scroll'
+import { LanguageSelect } from 'src/components/feature/Header/internal/LanguageSelect/'
+import { getTextStyle } from 'src/components/feature/Header/utils'
+import { scrollHome } from 'src/constants/scroll'
+import { Locale } from 'src/domains'
+
 type HeaderRightProps = {
   isBackgroundBlack: boolean
-  language: Language
+  locale: Locale
 }
 export const HeaderRight: React.FC<HeaderRightProps> = ({
   isBackgroundBlack,
-  language
+  locale
 }) => {
-  const t = language.locale
+  const t = locale.definition
   return (
     <>
       <Typography
@@ -26,10 +27,7 @@ export const HeaderRight: React.FC<HeaderRightProps> = ({
       >
         <Scroll to={scrollHome.contact} smooth={true} text={t.words.contact} />
       </Typography>
-      <LanguageSelect
-        isBackgroundBlack={isBackgroundBlack}
-        language={language}
-      />
+      <LanguageSelect isBackgroundBlack={isBackgroundBlack} locale={locale} />
     </>
   )
 }

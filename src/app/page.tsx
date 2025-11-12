@@ -1,5 +1,7 @@
+'use client'
 import IndexPage from 'src/components/pages/index/IndexPage'
-import { Language } from 'src/domains/valueObjects/language'
+import { Locale } from 'src/domains/'
+
 export default function Page() {
-  return <IndexPage languageCode={Language.EN} />
+  return <IndexPage locale={Locale.default()} />
 }
