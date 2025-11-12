@@ -11,8 +11,23 @@ export const Hero: React.FC = () => {
     setIsVideoReady(true)
   }, [])
 
+  const handleVideoEnded = useCallback(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.pause()
+    const duration = video.duration
+    if (!Number.isNaN(duration) && duration > 0) {
+      try {
+        video.currentTime = duration - 0.01
+      } catch (error) {
+        console.warn('Failed to set video to last frame:', error)
+      }
+    }
+  }, [])
+
   useEffect(() => {
-    if (!isVideoReady || !videoRef.current) return
+    if (!videoRef.current) return
     const playVideo = async () => {
       try {
         await videoRef.current?.play()
@@ -21,7 +36,7 @@ export const Hero: React.FC = () => {
       }
     }
     void playVideo()
-  }, [isVideoReady])
+  }, [])
 
   return (
     <Box
@@ -43,6 +58,7 @@ export const Hero: React.FC = () => {
         onLoadedData={handleVideoReady}
         onCanPlay={handleVideoReady}
         onLoadedMetadata={handleVideoReady}
+        onEnded={handleVideoEnded}
         style={{
           position: 'absolute',
           inset: 0,
