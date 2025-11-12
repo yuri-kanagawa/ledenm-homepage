@@ -37,7 +37,6 @@ export const Hero: React.FC = () => {
       <video
         ref={videoRef}
         autoPlay
-        loop
         muted
         playsInline
         preload="auto"
