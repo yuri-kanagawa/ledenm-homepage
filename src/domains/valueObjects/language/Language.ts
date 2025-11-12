@@ -154,7 +154,7 @@ export class Language {
   public static generatePages() {
     return Language.LANGUAGE_LIST.filter((code) => code !== Language.EN).map(
       (code) => ({
-        language: code
+        locale: code
       })
     )
   }

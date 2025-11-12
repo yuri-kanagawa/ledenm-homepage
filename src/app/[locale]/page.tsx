@@ -6,8 +6,8 @@ export default function Page({
   params
 }: {
   params: {
-    language: (typeof Language.LANGUAGE_LIST)[number]
+    locale: (typeof Language.LANGUAGE_LIST)[number]
   }
 }) {
-  return <IndexPage languageCode={params.language} />
+  return <IndexPage languageCode={params.locale} />
 }

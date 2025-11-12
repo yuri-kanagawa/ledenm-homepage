@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { Language } from 'src/domains/valueObjects/language/Language'
 
 type ParamsType = {
-  language: string
+  locale: string
 }
 
 export async function generateStaticParams(): Promise<ParamsType[]> {
@@ -12,12 +12,12 @@ export async function generateStaticParams(): Promise<ParamsType[]> {
 
 type Props = {
   params: {
-    language: string
+    locale: string
   }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const language = Language.create(params.language)
+  const language = Language.create(params.locale)
   return language.locale.meta
 }
 
@@ -27,10 +27,10 @@ export default function Layout({
 }: {
   children: React.ReactNode
   params: {
-    language: string
+    locale: string
   }
 }) {
-  const language = Language.create(params.language)
+  const language = Language.create(params.locale)
 
   if (language.isEnglish()) return redirect('/')
   if (!Language.isValidCode(language.toString())) return redirect('/')
