@@ -107,7 +107,7 @@ export class Language {
 
   static create(value: string): Language {
     if (!Language.isAvailableLanguage(value)) {
-      throw new Error(`Invalid language: ${value}`)
+      return Language.default()
     }
     return new Language(
       value as (typeof Language.CODES)[keyof typeof Language.CODES]
