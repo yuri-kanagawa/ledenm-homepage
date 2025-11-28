@@ -6,3 +6,5 @@ export const words = {
 
 export type WordsType = typeof words
 
+
+
