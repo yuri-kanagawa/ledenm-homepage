@@ -1,8 +1,7 @@
 'use client'
-import { Box, Grid, Stack, Typography } from '@mui/material'
+import { Box, Stack, Typography } from '@mui/material'
 import { AppCard } from './internal/AppCard'
-import { useMemo } from 'react'
-import { useMediaQuerySize } from 'src/hooks/useMediaQuerySize'
+import { useEffect, useRef, useState } from 'react'
 import { scrollHome } from 'src/constants/scroll'
 import { Locale } from 'src/domains'
 
@@ -13,13 +12,64 @@ type Props = {
 export const AppList = ({ locale }: Props) => {
   const { words } = locale.definition
   const apps = locale.apps
-  const { isDesktopSize, isLaptopSize, isTabletSize } = useMediaQuerySize()
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [isScrollingRight, setIsScrollingRight] = useState(true)
+  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
-  const columnSpacing = useMemo(() => {
-    if (isDesktopSize || isLaptopSize) return 5
-    if (isTabletSize) return 3
-    return 1
-  }, [isDesktopSize, isLaptopSize, isTabletSize])
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    const startAutoScroll = () => {
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current)
+      }
+
+      scrollIntervalRef.current = setInterval(() => {
+        const container = scrollContainerRef.current
+        if (!container) return
+
+        const cardWidth = container.scrollWidth / apps.length
+        const maxScroll = container.scrollWidth - container.clientWidth
+        const currentScroll = container.scrollLeft
+
+        let newScroll: number
+        let newDirection = isScrollingRight
+
+        if (isScrollingRight) {
+          newScroll = currentScroll + cardWidth
+          // 右端に到達したら左に戻る
+          if (newScroll >= maxScroll) {
+            newScroll = maxScroll
+            newDirection = false
+            setIsScrollingRight(false)
+          }
+        } else {
+          newScroll = currentScroll - cardWidth
+          // 左端に到達したら右に進む
+          if (newScroll <= 0) {
+            newScroll = 0
+            newDirection = true
+            setIsScrollingRight(true)
+          }
+        }
+
+        container.scrollTo({
+          left: newScroll,
+          behavior: 'smooth'
+        })
+      }, 4000) // 4秒ごとにスライド
+    }
+
+    startAutoScroll()
+
+    return () => {
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current)
+      }
+    }
+  }, [apps.length, isScrollingRight])
+
   return (
     <Box
       id={scrollHome.app}
@@ -31,15 +81,41 @@ export const AppList = ({ locale }: Props) => {
         <Typography sx={{ textAlign: 'center', fontSize: 40, mb: 2 }}>
           {words.app}
         </Typography>
-        <Grid
-          container
-          sx={{ justifyContent: 'center', pb: 4 }}
-          columnSpacing={columnSpacing}
+        <Box
+          ref={scrollContainerRef}
+          sx={{
+            display: 'flex',
+            overflowX: 'auto',
+            gap: 5,
+            pb: 4,
+            px: 5,
+            scrollBehavior: 'smooth',
+            '&::-webkit-scrollbar': {
+              display: 'none'
+            },
+            scrollbarWidth: 'none'
+          }}
         >
           {apps.map((app, index) => (
-            <AppCard key={index} appName={app.name} explain={app.explain} />
+            <Box
+              key={index}
+              sx={{
+                width: 'calc((100% - 160px) / 3)',
+                minWidth: 'calc((100% - 160px) / 3)',
+                flexShrink: 0,
+                px: 0.5
+              }}
+            >
+              <AppCard
+                appName={app.name}
+                explain={app.explain}
+                url={
+                  locale.isEnglish() ? app.url : `${app.url}/${locale.value}`
+                }
+              />
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </Stack>
     </Box>
   )

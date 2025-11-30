@@ -4,6 +4,11 @@ import { App } from 'src/constants/app'
 const getUrl = (url: string): string => `${url}/hi-IN`
 
 export const apps: AppsValueType = {
+  qrunir: {
+    name: App.qrunir.name,
+    explain: 'QRunir एक ऐप है जो QR कोड पढ़, उत्पन्न और संपादित कर सकता है',
+    url: getUrl(App.qrunir.url)
+  },
   cCoin: {
     name: App.cCoin.name,
     explain: 'C-Coin adalah Koin Curang',

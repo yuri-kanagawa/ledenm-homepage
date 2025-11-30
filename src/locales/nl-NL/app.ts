@@ -12,6 +12,11 @@ type AppsType = {
 }
 
 export const apps: AppsType = {
+  qrunir: {
+    name: App.qrunir.name,
+    explain: 'QRunir is een app die QR-codes kan lezen, genereren en bewerken',
+    url: App.qrunir.url
+  },
   cCoin: {
     name: App.cCoin.name,
     explain: 'C-Coin is een cheat-munt van ledenm',

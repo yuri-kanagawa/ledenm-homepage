@@ -4,6 +4,11 @@ import { App } from 'src/constants/app'
 const getUrl = (url: string): string => `${url}/ja-JP`
 
 export const apps: AppsValueType = {
+  qrunir: {
+    name: App.qrunir.name,
+    explain: 'QRunir は qrコードを読み取ったり、生成編集可能なアプリです',
+    url: getUrl(App.qrunir.url)
+  },
   cCoin: {
     name: App.cCoin.name,
     explain: 'C-Coin はイカサマコインです',

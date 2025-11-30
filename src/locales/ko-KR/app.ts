@@ -4,6 +4,11 @@ import { App } from 'src/constants/app'
 const getUrl = (url: string): string => `${url}/ko-KR`
 
 export const apps: AppsValueType = {
+  qrunir: {
+    name: App.qrunir.name,
+    explain: 'QRunir은 QR 코드를 읽고, 생성하고, 편집할 수 있는 앱입니다',
+    url: getUrl(App.qrunir.url)
+  },
   cCoin: {
     name: App.cCoin.name,
     explain: 'C-Coin은 치트코인입니다',

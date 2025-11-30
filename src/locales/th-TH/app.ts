@@ -12,6 +12,11 @@ type AppsType = {
 }
 
 export const apps: AppsType = {
+  qrunir: {
+    name: App.qrunir.name,
+    explain: 'QRunir คือแอปที่สามารถอ่าน สร้าง และแก้ไข QR code ได้',
+    url: App.qrunir.url
+  },
   cCoin: {
     name: App.cCoin.name,
     explain: 'C-Coin คือเหรียญโกงของ ledenm',

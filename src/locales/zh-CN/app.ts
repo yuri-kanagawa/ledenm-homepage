@@ -4,6 +4,11 @@ import { AppsValueType } from 'src/locales/en-US'
 const getUrl = (url: string): string => `${url}/zh-CN`
 
 export const apps: AppsValueType = {
+  qrunir: {
+    name: App.qrunir.name,
+    explain: 'QRunir 是一款可以读取、生成和编辑二维码的应用',
+    url: getUrl(App.qrunir.url)
+  },
   cCoin: {
     name: App.cCoin.name,
     explain: 'C-Coin是作弊币',

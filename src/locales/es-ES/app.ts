@@ -4,6 +4,11 @@ import { App } from 'src/constants/app'
 const getUrl = (url: string): string => `${url}/es-ES`
 
 export const apps: AppsValueType = {
+  qrunir: {
+    name: App.qrunir.name,
+    explain: 'QRunir es una aplicación que puede leer, generar y editar códigos QR',
+    url: getUrl(App.qrunir.url)
+  },
   cCoin: {
     name: App.cCoin.name,
     explain: 'C-Coin es una moneda trampa',

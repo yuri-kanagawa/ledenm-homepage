@@ -4,6 +4,11 @@ import { AppsValueType } from 'src/locales/en-US'
 const getUrl = (url: string): string => `${url}/zh-TW`
 
 export const apps: AppsValueType = {
+  qrunir: {
+    name: App.qrunir.name,
+    explain: 'QRunir 是一款可以讀取、生成和編輯 QR 碼的應用',
+    url: getUrl(App.qrunir.url)
+  },
   cCoin: {
     name: App.cCoin.name,
     explain: 'C-Coin 是作弊幣',
